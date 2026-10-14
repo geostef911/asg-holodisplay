@@ -1,0 +1,9 @@
+{
+  "name": "HOLODISPLAY — previzualizare privată",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+  "forwardPorts": [4173],
+  "portsAttributes": {
+    "4173": {"label": "Website HOLODISPLAY", "onAutoForward": "notify", "protocol": "http"}
+  },
+  "containerEnv": {"HOST":"0.0.0.0", "PORT":"4173"}
+}
