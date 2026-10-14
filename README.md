@@ -12,6 +12,14 @@ node server.mjs
 
 Deschide http://127.0.0.1:4173. Pentru verificări: `node --test test.mjs`. Nu există dependențe de instalat. Serverul ascultă exclusiv pe calculatorul local.
 
+## Previzualizare privată în GitHub Codespaces
+
+În repository, selectează **Code → Codespaces → Create codespace on main**. După deschiderea editorului, în terminal rulează `node server.mjs`. Selectează **Ports**, portul **4173**, apoi **Open in Browser**. Păstrează vizibilitatea portului **Private**. Pagina se deschide normal, cu stiluri, animație și formular. Folosește date fictive: aceasta rămâne o previzualizare, nu găzduire comercială. Cererile de test se salvează în Codespace și nu sunt trimise pe email.
+
+Fișierul `.devcontainer/devcontainer.json` pregătește Node.js și portul. Serverul recunoaște originea HTTPS a Codespace-ului pentru formular. Nu este necesară instalarea unor pachete.
+
+După verificare, oprește Codespace-ul din meniul său. GitHub include o cotă lunară pentru conturile personale; compute și stocare pot costa după consumarea ei dacă plata este activată. [Costuri și cote GitHub](https://docs.github.com/en/billing/concepts/product-billing/github-codespaces). Datele din Codespace dispar dacă îl ștergi; exportă separat orice fișier pe care vrei să îl păstrezi.
+
 ## Formular și confirmare
 
 Formularul trimite datele către server și confirmă înregistrarea numai după salvarea cu succes. Solicitările se salvează separat în `private-data/`, cu referință, data înregistrării și versiunea informării acceptate. Acest director nu este servit prin web. Nu se trimit emailuri. Previzualizarea cere date fictive; șterge solicitările de test înainte de utilizare comercială. Directorul este exclus din Git, dar trebuie exclus separat și din orice arhivă destinată publicării.
