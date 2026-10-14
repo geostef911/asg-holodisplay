@@ -31,3 +31,16 @@ test('Formularul validează și salvează cererile fără să expună datele',as
   assert.equal((await send(data)).status,429);assert.equal((await readdir(dir)).length,5);
  }finally{child.kill();await new Promise(r=>child.once('exit',r));await rm(dir,{recursive:true,force:true});}
 });
+
+test('Formularul acceptă originea HTTPS dintr-un Codespace privat',async()=>{
+ const root=dirname(fileURLToPath(import.meta.url));const dir=await mkdtemp(join(tmpdir(),'halo-origin-test-'));
+ const child=spawn(process.execPath,['server.mjs'],{cwd:root,env:{...process.env,PORT:'0',LEADS_DIR:dir,CODESPACE_NAME:'preview-test',GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN:'app.github.dev',APP_ORIGIN:''},stdio:['ignore','pipe','pipe']});
+ try{
+  const url=await new Promise((resolve,reject)=>{child.stdout.on('data',d=>{const m=String(d).match(/http:\/\/127.0.0.1:\d+/);if(m)resolve(m[0])});child.on('error',reject);child.on('exit',c=>reject(Error(`exit ${c}`)));setTimeout(()=>reject(Error('Timeout')),5000).unref()});
+  const data={selection:'sale',name:'Client Test',company:'Companie Test',phone:'0700000000',email:'test@example.invalid',city:'Oraș Test',details:'Proiect fictiv',consent:true,website:''};
+  const send=origin=>fetch(url+'/api/requests',{method:'POST',headers:{'Content-Type':'application/json',Origin:origin},body:JSON.stringify(data)});
+  assert.equal((await send('https://preview-test-0.app.github.dev')).status,201);
+  assert.equal((await send('https://other-preview-0.app.github.dev')).status,403);
+  assert.equal((await send(url)).status,403);
+ }finally{child.kill();await new Promise(r=>child.once('exit',r));await rm(dir,{recursive:true,force:true});}
+});
