@@ -6,6 +6,9 @@ import {randomUUID} from 'node:crypto';
 const root=dirname(fileURLToPath(import.meta.url));
 const config=JSON.parse(await readFile(join(root,'site-config.json'),'utf8'));
 const dataDir=process.env.LEADS_DIR||join(root,'private-data');
+const port=Number(process.env.PORT||4173);
+const codespaceOrigin=process.env.CODESPACE_NAME?`https://${process.env.CODESPACE_NAME}-${port}.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN||'app.github.dev'}`:null;
+const externalOrigin=process.env.APP_ORIGIN||codespaceOrigin;
 const allowedSelections=new Set(['general','pharmacy','retail',...config.packages.map(p=>p.id),...config.products.map(p=>p.id)]);
 const limits=new Map();
 const json=(res,status,obj)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(obj));};
@@ -18,7 +21,7 @@ const server=http.createServer(async(req,res)=>{
     if(req.url==='/api/config'&&req.method==='GET')return json(res,200,publicConfig);
     if(req.url==='/api/requests'&&req.method==='POST'){
       const origin=req.headers.origin;
-      if(!origin || origin!==`http://${req.headers.host}`)return json(res,403,{error:'Origine nepermisă.'});
+      if(!origin || origin!==(externalOrigin||`http://${req.headers.host}`))return json(res,403,{error:'Origine nepermisă.'});
       const type=req.headers['content-type']||'';
       if(!type.startsWith('application/json'))return json(res,415,{error:'Format neacceptat.'});
       let body='';for await(const chunk of req){body+=chunk;if(Buffer.byteLength(body)>16000)return json(res,413,{error:'Solicitarea este prea lungă.'});}
@@ -53,4 +56,4 @@ const server=http.createServer(async(req,res)=>{
     res.writeHead(200,{'Content-Type':({'.html':'text/html','.css':'text/css','.js':'text/javascript'})[extname(files[path])]+'; charset=utf-8'});res.end(req.method==='HEAD'?undefined:bytes);
   }catch{json(res,500,{error:'Solicitarea nu a putut fi salvată. Încearcă din nou.'});}
 });
-server.listen(Number(process.env.PORT||4173),'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${server.address().port}`));
+server.listen(port,process.env.HOST||'127.0.0.1',()=>console.log(`Local: http://127.0.0.1:${server.address().port}`));
