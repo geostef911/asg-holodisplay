@@ -1,0 +1,90 @@
+{
+  "brand": "HALO Studio",
+  "brandNote": "Nume provizoriu",
+  "contact": {
+    "company": "ASG THUNDERBOLT SRL",
+    "email": "",
+    "phone": "",
+    "address": ""
+  },
+  "products": [],
+  "packages": [
+    {
+      "id": "display",
+      "title": "Închiriere HOLODISPLAY",
+      "description": "Folosință temporară a echipamentului, pentru minimum 12 luni. Echipamentul rămâne proprietatea ASG THUNDERBOLT SRL.",
+      "items": [
+        "3 animații 3D inițiale incluse",
+        "Garanție separată de chirie: 400 EUR",
+        "Suport tehnic în limitele serviciilor incluse",
+        "Instalare inclusă numai dacă oferta o prevede"
+      ],
+      "priceLabel": "200 EUR",
+      "priceNote": "+ TVA / lună · minimum 12 luni",
+      "cta": "Solicită oferta de închiriere ↗"
+    },
+    {
+      "id": "sale",
+      "title": "Vânzare HOLODISPLAY",
+      "description": "Varianta de achiziție are o ofertă și un contract distincte. Modelul, configurația și livrabilele se confirmă înainte de cumpărare.",
+      "items": [
+        "Preț comunicat de ASG THUNDERBOLT SRL",
+        "Model și accesorii: de confirmat",
+        "Conținut 3D și instalare: de confirmat",
+        "Condițiile închirierii nu se aplică automat"
+      ],
+      "priceLabel": "2.500 lei",
+      "priceNote": "+ TVA · conținutul ofertei de confirmat",
+      "cta": "Solicită oferta de vânzare ↗"
+    },
+    {
+      "id": "content",
+      "title": "Animații suplimentare",
+      "description": "Animațiile suplimentare, modificările majore și cererile peste pachetul inițial se facturează separat.",
+      "items": [
+        "Animație simplă: 50 EUR + TVA",
+        "Animație standard: 75 EUR + TVA",
+        "Animație complexă: 100–150 EUR + TVA",
+        "Prețul și termenul se confirmă înainte de lucru"
+      ],
+      "priceLabel": "De la 50 EUR",
+      "priceNote": "+ TVA / animație · tarife orientative",
+      "cta": "Solicită o animație ↗"
+    }
+  ],
+  "privacy": {
+    "operator": "ASG THUNDERBOLT SRL",
+    "email": "",
+    "retention": "",
+    "legalBasis": "",
+    "version": "draft-2026-10-14"
+  },
+  "internal": {
+    "sourceContract": "Contract_inchiriere_HOLODISPLAY_ASG_Thunderbolt - cu AI.docx",
+    "sourceStatus": "Model de contract cu date juridice și câmpuri comerciale necompletate",
+    "saleOffer": {
+      "amountLei": 2500,
+      "vat": "TVA se adaugă; confirmat de utilizator",
+      "scope": "Modelul, accesoriile, conținutul 3D și instalarea trebuie confirmate",
+      "source": "Clarificările utilizatorului din 14 octombrie 2026"
+    },
+    "rentalSource": {
+      "sections": [
+        "IV",
+        "V",
+        "VI",
+        "VII",
+        "VIII",
+        "IX",
+        "X",
+        "XV"
+      ],
+      "minimumMonths": 12,
+      "monthlyRentEUR": 200,
+      "minimumRentEUR": 2400,
+      "depositEUR": 400,
+      "initialAnimations": 3
+    },
+    "publicationApproved": false
+  }
+}
